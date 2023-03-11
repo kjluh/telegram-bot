@@ -65,6 +65,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                     SendMessage message = new SendMessage(chatId, "ошибка " + e);
                     telegramBot.execute(message);
                 }
+
             }
             run();
         });
@@ -74,11 +75,11 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     @Scheduled(cron = "0 0/1 * * * *")
     public void run() {
         notificationTask task = notificationTaskRepository.
-                getByDateTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+                findByDateTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
         if (task != null) {
-            SendMessage message = new SendMessage(task.getId(), task.getMessage());
-            SendResponse response = telegramBot.execute(message);
-            response.isOk();
+            SendMessage message = new SendMessage(task.getChatId(), task.getMessage());
+            telegramBot.execute(message);
+
         }
     }
 }
