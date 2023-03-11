@@ -77,9 +77,9 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         notificationTask task = notificationTaskRepository.
                 findByDateTime(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
         if (task != null) {
-            SendMessage message = new SendMessage(task.getId(), task.getMessage());
-            SendResponse response = telegramBot.execute(message);
-            response.isOk();
+            SendMessage message = new SendMessage(task.getChatId(), task.getMessage());
+            telegramBot.execute(message);
+
         }
     }
 }
