@@ -1,4 +1,4 @@
-package pro.sky.telegrambot;
+package pro.sky.telegrambot.listener;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
